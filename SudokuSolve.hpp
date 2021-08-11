@@ -60,6 +60,8 @@ public:
             used_nums_in_box[i].fill(false);
             used_nums_in_row[i].fill(false);
             used_nums_in_col[i].fill(false);
+        }
+        for (int i = 0; i < a.size(); ++i) {
             for (int j = 0; j < a[i].size(); ++j) {
                 if (a[i][j] < 1 || a[i][j] > 9) {
                     blanks.push_back({i, j});
