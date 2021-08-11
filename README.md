@@ -1,6 +1,6 @@
 # Sudoku Solver 
 
-C++ implementation
+C++ implementation: Solving a 9 × 9 Sudoku
 
 https://en.wikipedia.org/wiki/Sudoku_solving_algorithms
 
