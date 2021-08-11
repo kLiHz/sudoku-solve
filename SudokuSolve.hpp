@@ -1,8 +1,6 @@
 #include <array>
 #include <vector>
 #include <string>
-#include <numeric>
-#include <algorithm>
 #include <iosfwd>
 
 class SudokuSolve {
@@ -22,25 +20,23 @@ private:
     std::array<std::array<bool, 10>, 9> used_nums_in_col;
     std::array<std::array<bool, 10>, 9> used_nums_in_box;
 
-    auto & used_in_row(int row) { return used_nums_in_row[row]; }
-    auto & used_in_col(int col) { return used_nums_in_col[col]; }
-    auto & used_in_box(int row, int col) {
-        auto box_no = ((row / 3) * 3) + (col / 3);
-        return used_nums_in_box[box_no];
-    }
     auto mark_as_used(int row, int col, int val) {
-        used_in_row(row)[val] = true;
-        used_in_col(col)[val] = true;
-        used_in_box(row, col)[val] = true;
+        used_nums_in_row[row][val] = true;
+        used_nums_in_col[col][val] = true;
+        auto box_no = ((row / 3) * 3) + (col / 3);
+        used_nums_in_box[box_no][val] = true;
     }
     auto unmark_used(int row, int col, int val) {
-        used_in_row(row)[val] = false;
-        used_in_col(col)[val] = false;
-        used_in_box(row, col)[val] = false;
+        used_nums_in_row[row][val] = false;
+        used_nums_in_col[col][val] = false;
+        auto box_no = ((row / 3) * 3) + (col / 3);
+        used_nums_in_box[box_no][val] = false;
     }
     auto legal(int row, int col, int val) {
-        return !((used_in_row(row)[val]) || (used_in_col(col)[val]) || (used_in_box(row, col)[val]));
+        auto box_no = ((row / 3) * 3) + (col / 3);
+        return !(used_nums_in_row[row][val] || used_nums_in_col[col][val] || used_nums_in_box[box_no][val]);
     }
+
     auto DFS_(std::vector<Pos>::iterator i) {
         if (i == end(blanks)) {
             finished = true;

@@ -10,5 +10,6 @@ int main() {
     }
     SudokuSolve inst(m);
     inst.DFS_solve();
+    std::cout << "\n";
     std::cout << inst;
 }
